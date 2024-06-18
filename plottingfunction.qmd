@@ -1,0 +1,147 @@
+---
+title: "Plotting function"
+---
+
+Hello here you can find my *plotting function*.
+
+```{r, echo=F, warning=FALSE, message=FALSE}
+r <- getOption("repos")
+r["CRAN"] <-"https://cloud.r-project.org/"
+options(repos=r)
+
+if (!require(haven)) {
+    install.packages("haven")
+    require(haven)
+}
+
+if (!require(ggplot2)) {
+    install.packages("ggplot2")
+    require(ggplot2)
+}
+if (!require(tidyverse)) {
+    install.packages("tidyverse")
+    require(tidyverse)
+}
+```
+
+------------------------------------------------------------------------
+
+### How to write a plotting function
+
+First we read load the packages *haven* and *ggplot2*.
+
+```{r, echo=T,eval=F}
+library(haven)
+library(ggplot2)
+
+```
+
+The next step is to load the data from [Stanciu](https://adrianstanciu.eu) et al. (2017).
+
+```{r, echo = T}
+df <- read_sav("data/sample.sav")
+```
+
+After that we are creating a function for plotting.
+
+```{r, echo = FALSE}
+func_plot <- function(data, variable){
+  
+  if (!(variable %in% names(data))) {
+    stop("Variable not found in data frame")
+  }
+ 
+  if(!is.numeric(data[[variable]])) {
+    stop("Variable is not numeric")
+  }
+  
+  ggplot(data, aes_string(x = variable)) +
+    geom_bar(fill = "skyblue", color = "black") +
+    labs(title = paste("Histogram of", variable),
+         x = variable,
+         y = "Frequency") +
+    theme_minimal()
+  
+}
+```
+
+------------------------------------------------------------------------
+
+### Let's look at it, step by step.
+
+We create a new object **func_plot**. This function accesses a **data set** and the **variables** contained in it
+
+```{r, echo = T, eval = F}
+func_plot <- function(data, variable){
+  
+}
+```
+
+First we want to check if the called variable is inside the data set. If not, there will be a warning message displayed: *"Variable not found in data frame"*.
+
+```{r, echo = T, eval = F}
+func_plot <- function(data, variable){
+  
+  if (!(variable %in% names(data))) {
+    stop("Variable not found in data frame")
+  }}
+```
+
+After that we check if the variable is or is not numeric. If the variable is **not** numeric, the warning message *"Variable is not numeric"* will be displayed.
+
+```{r, echo = T, eval = F}
+func_plot <- function(data, variable){
+  
+  if (!(variable %in% names(data))) {
+    stop("Variable not found in data frame")
+  }
+ 
+  if(!is.numeric(data[[variable]])) {
+    stop("Variable is not numeric")
+  }}
+```
+
+The last step is to great a plot with the package *ggplot2*. We are creating a histogram with *geom_bar* and customized colours and title.
+
+```{r}
+func_plot <- function(data, variable){
+  
+  if (!(variable %in% names(data))) {
+    stop("Variable not found in data frame")
+  }
+ 
+  if(!is.numeric(data[[variable]])) {
+    stop("Variable is not numeric")
+  }
+  
+  ggplot(data, aes_string(x = variable)) +
+    geom_bar(fill = "skyblue", color = "black") +
+    labs(title = paste("Histogram of", variable),
+         x = variable,
+         y = "Frequency") +
+    theme_minimal()
+  
+}
+```
+
+------------------------------------------------------------------------
+
+### Final results
+
+Now we will use this new function with the variable **gen** which stands for gender, with ($1=female;2=male$).
+
+```{r, warning=FALSE, message=FALSE, out.width = '60%'}
+func_plot(df, "gen")
+```
+
+And once again, with the variable **age**.
+
+```{r, out.width = '120%'}
+func_plot(df, "age")
+```
+
+And a last time with **men_warm**.
+
+```{r, warning=FALSE, message=FALSE}
+func_plot(df, "men_warm") 
+```

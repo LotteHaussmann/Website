@@ -1,0 +1,31 @@
+project:
+  type: website
+  output-dir: docs
+
+website:
+  title: "Charlotte"
+  favicon: favicon.png
+  navbar:
+    background: "dark"
+    tools:
+      - icon: github
+        href: https://github.com/LotteHaussmann
+      - icon: twitter
+        href: https://x.com/lottehaussmann
+    left: 
+      - href: index.qmd
+        text: Home
+      - about.qmd
+      - text: "Functions"
+        menu: 
+          - plottingfunction.qmd
+          - secondfunction.qmd
+    
+format:
+  html:
+    theme: cosmo
+    css: styles.css
+    toc: true
+
+editor: visual
+

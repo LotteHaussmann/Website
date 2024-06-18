@@ -1,0 +1,54 @@
+---
+title: "Live Text"
+---
+
+### Plain vs. live text
+
+```{r, echo = F}
+pacman::p_load(tidyverse, readxl, haven, sjlabelled, BiocManager, kableExtra, downloadthis)
+dfex<-haven::read_sav("data/sample.sav")
+dfmv<-readxl::read_excel("data/movies.xlsx",1)
+
+```
+
+This is an example of how automatization can be implemented in the work flow. My list of movies include `r nrow(dfmv)` entries. The title of those movies are `r dfmv$Movie`. Is there a movie that I actually don't like on that list, well, the answer is that I dislike exactly `r dfmv %>% filter(Like %in% c("No","no","NO")) %>% nrow()` movies on that list.\
+On average I liked all movies on a grade of `r mean(dfmv$Grade)` with the lowest rating of `r min(dfmv$Grade)` to the max rating of `r max(dfmv$Grade)` .
+
+------------------------------------------------------------------------
+
+You can also add automated regression results to the text. Here is an example with the data provided [Stanciu](https://adrianstanciu.eu) et al. (2017).
+
+```{r, echo = F}
+# complete cases
+dfex_full <- dfex[complete.cases(dfex$age, dfex$gen, dfex$men_warm, dfex$men_comp),]
+
+reg1 <- lm(men_warm ~ age + gen, data = dfex_full )
+summary_reg1 <- summary(reg1)
+coefficients <- summary_reg1$coefficients
+
+#p_values <- coefficients[, "Pr(>|t|)"]
+x <- "not significant"
+y <- "significant"
+```
+
+The regression shows that age have an effect of `r coefficients[2,1]` with a p-value of `r coefficients[2,4]`. The estimator is `r ifelse(coefficients[2,4]< .05, y ,x)`. Gender has an effect of `r coefficients[3,1]` with a p-value of `r coefficients[3,4]`. The estimator is `r ifelse(coefficients[2,4]< .05, y ,x)`.
+
+```{r, echo =F}
+summary_reg1
+download <- data.frame(coefficients)
+write.csv(download, "summary.csv")
+```
+
+Here you can **download** the regression results as a .csv-file.
+
+```{r, echo = F}
+
+
+downloadthis::download_this(download, 
+  output_name = "regression",
+  output_extension = ".csv",
+  button_label = "Download as csv",
+  button_type = "primary",
+  has_icon = TRUE,
+  icon = "fa fa-save" )
+```

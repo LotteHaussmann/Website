@@ -1,0 +1,13 @@
+---
+title: "Charlotte"
+---
+
+Hello, this is my website.
+
+Here you can see my new working place:
+
+[![Belval Campus](img/belval.jpeg){alt="Belval Campus" fig-align="center" width="600"}](https://www.uni.lu/en/)
+
+And also a nice cat gif:
+
+![](https://media.giphy.com/media/vFKqnCdLPNOKc/giphy.gif){fig-align="center"}

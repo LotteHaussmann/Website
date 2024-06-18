@@ -1,0 +1,30 @@
+[
+  {
+    "objectID": "secondfunction.html",
+    "href": "secondfunction.html",
+    "title": "Live Text",
+    "section": "",
+    "text": "Plain vs. live text\nThis is an example of how automatization can be implemented in the work flow. My list of movies include 6 entries. The title of those movies are John Wick, Call me by your name, Terminator, 4 months 3 weeks and 2 days, Bones and All, The Hunt for Red October . Is there a movie that I actually don’t like on that list, well, the answer is that I dislike exactly 2 movies on that list.\nOn average I liked all movies on a grade of 7.1666667 with the lowest rating of 1 to the max rating of 10 .\n\nYou can also add automated regression results to the text. Here is an example with the data provided Stanciu et al. (2017).\nThe regression shows that age have an effect of -0.0059283 with a p-value of 0.6578563. The estimator is not significant. Gender has an effect of 0.083075 with a p-value of 0.6654052. The estimator is not significant.\n\n\n\nCall:\nlm(formula = men_warm ~ age + gen, data = dfex_full)\n\nResiduals:\n    Min      1Q  Median      3Q     Max \n-2.5359 -0.5908  0.3870  0.4641  1.4997 \n\nCoefficients:\n             Estimate Std. Error t value Pr(&gt;|t|)    \n(Intercept)  3.577292   0.388801   9.201    1e-14 ***\nage         -0.005928   0.013343  -0.444    0.658    \ngen          0.083075   0.191485   0.434    0.665    \n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n\nResidual standard error: 0.9008 on 93 degrees of freedom\nMultiple R-squared:  0.003552,  Adjusted R-squared:  -0.01788 \nF-statistic: 0.1657 on 2 and 93 DF,  p-value: 0.8475\n\n\nHere you can download the regression results as a .csv-file.\n\n\n Download as csv"
+  },
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "Charlotte",
+    "section": "",
+    "text": "Hello, this is my website.\nHere you can see my new working place:\n\n\n\n\n\n\n\nBelval Campus\n\n\nAnd also a nice cat gif:"
+  },
+  {
+    "objectID": "about.html",
+    "href": "about.html",
+    "title": "About",
+    "section": "",
+    "text": "Here you can find some information about me.\n\nWork\n\nPHD Candidate in Social Sciences (Oct 2023 - Present)\nI am currently working researcher in the Youth Research Group of the Centre for Childhood and Youth Research at the Department of Social Sciences. I am investigating the connection between media use and loneliness among young people.\n\nWebsite Youth in Luxembourg\n\n\n\n\nEducation\n\nRPTU Kaierslautern-Landau (2019 - 2021)\nMaster of Arts - Integrative Social Sciences\n\n\n\nPublications\nCharlotte Haußmann, Tobias Rüttenauer, Material deprivation and the Brexit referendum: a spatial multilevel analysis of the interplay between individual and regional deprivation, European Sociological Review, Volume 40, Issue 3, June 2024, Pages 479–492, https://doi.org/10.1093/esr/jcad057"
+  },
+  {
+    "objectID": "plottingfunction.html",
+    "href": "plottingfunction.html",
+    "title": "Plotting function",
+    "section": "",
+    "text": "Hello here you can find my plotting function.\n\n\nHow to write a plotting function\nFirst we read load the packages haven and ggplot2.\n\nlibrary(haven)\nlibrary(ggplot2)\n\nThe next step is to load the data from Stanciu et al. (2017).\n\ndf &lt;- read_sav(\"data/sample.sav\")\n\nAfter that we are creating a function for plotting.\n\n\n\nLet’s look at it, step by step.\nWe create a new object func_plot. This function accesses a data set and the variables contained in it\n\nfunc_plot &lt;- function(data, variable){\n  \n}\n\nFirst we want to check if the called variable is inside the data set. If not, there will be a warning message displayed: “Variable not found in data frame”.\n\nfunc_plot &lt;- function(data, variable){\n  \n  if (!(variable %in% names(data))) {\n    stop(\"Variable not found in data frame\")\n  }}\n\nAfter that we check if the variable is or is not numeric. If the variable is not numeric, the warning message “Variable is not numeric” will be displayed.\n\nfunc_plot &lt;- function(data, variable){\n  \n  if (!(variable %in% names(data))) {\n    stop(\"Variable not found in data frame\")\n  }\n \n  if(!is.numeric(data[[variable]])) {\n    stop(\"Variable is not numeric\")\n  }}\n\nThe last step is to great a plot with the package ggplot2. We are creating a histogram with geom_bar and customized colours and title.\n\nfunc_plot &lt;- function(data, variable){\n  \n  if (!(variable %in% names(data))) {\n    stop(\"Variable not found in data frame\")\n  }\n \n  if(!is.numeric(data[[variable]])) {\n    stop(\"Variable is not numeric\")\n  }\n  \n  ggplot(data, aes_string(x = variable)) +\n    geom_bar(fill = \"skyblue\", color = \"black\") +\n    labs(title = paste(\"Histogram of\", variable),\n         x = variable,\n         y = \"Frequency\") +\n    theme_minimal()\n  \n}\n\n\n\n\nFinal results\nNow we will use this new function with the variable gen which stands for gender, with (\\(1=female;2=male\\)).\n\nfunc_plot(df, \"gen\")\n\n\n\n\n\n\n\n\nAnd once again, with the variable age.\n\nfunc_plot(df, \"age\")\n\n\n\n\n\n\n\n\nAnd a last time with men_warm.\n\nfunc_plot(df, \"men_warm\")"
+  }
+]
