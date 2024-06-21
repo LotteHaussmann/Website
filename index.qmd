@@ -11,3 +11,15 @@ Here you can see my new working place:
 And also a nice cat gif:
 
 ![](https://media.giphy.com/media/vFKqnCdLPNOKc/giphy.gif){fig-align="center" width="400"}
+
+
+<!---Adrian comments, June 21, 2024
+
+This is a very nice website, has a functioning structure and is already visually intuitive. 
+
+Work on the website and update it as you go. It might come in handy later on when you want to show case your expertise and skills. 
+
+One suggestion is to store all images inside one designated sub-folder, for example, the "img" one that is already available. The data inside a designated sub-folder too, like "data" that is already available.
+
+
+--->
